@@ -1,38 +1,45 @@
-import { SessionType, useSession as useLensSession } from "@lens-protocol/react-web";
-import { useAccount as useWagmiAccount } from "wagmi";
+import {
+  SessionType,
+  useSession as useLensSession,
+} from "@lens-protocol/react-web"
+import { useAccount as useWagmiAccount } from "wagmi"
 
-import { ConnectWalletButton } from "./ConnectWalletButton";
-import { LoginForm } from "./LoginForm";
-import { LogoutButton } from "./LogoutButton";
-import { truncateEthAddress } from "@/utils/truncateEthAddress";
-import { DisconnectWalletButton } from "./DisconnectWalletButton";
+import { truncateEthAddress } from "@/utils/truncateEthAddress"
+import { ConnectWalletButton } from "./ConnectWalletButton"
+import { DisconnectWalletButton } from "./DisconnectWalletButton"
+import { LoginForm } from "./LoginForm"
+import { LogoutButton } from "./LogoutButton"
 
-export function WelcomeToLens() {
-  const { isConnected, address } = useWagmiAccount();
-  const { data: session } = useLensSession();
+export function LensLogin() {
+  const { isConnected, address } = useWagmiAccount()
+  const { data: session } = useLensSession()
 
   // step 1. connect wallet
   if (!isConnected) {
     return (
       <>
-        <p className="mb-4 text-gray-500">Connect your wallet to get started.</p>
+        <p className="mb-4 text-gray-500">
+          Connect your wallet to get started.
+        </p>
         <ConnectWalletButton />
       </>
-    );
+    )
   }
 
   // step 2. connect Lens Profile
   if (!session?.authenticated && address) {
     return (
       <>
-        <p className="mb-4 text-gray-500">Connected wallet: {truncateEthAddress(address)}</p>
+        <p className="mb-4 text-gray-500">
+          Connected wallet: {truncateEthAddress(address)}
+        </p>
         <LoginForm owner={address} />
 
         <div className="mt-2">
           <DisconnectWalletButton />
         </div>
       </>
-    );
+    )
   }
 
   // step 3. show Profile details
@@ -48,9 +55,9 @@ export function WelcomeToLens() {
         </p>
         <LogoutButton />
       </>
-    );
+    )
   }
 
   // you can handle other session types here
-  return null;
+  return null
 }
