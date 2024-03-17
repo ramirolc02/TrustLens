@@ -1,8 +1,8 @@
 import { textOnly } from "@lens-protocol/metadata"
 import { useCreatePost } from "@lens-protocol/react-web"
 import { toast } from "react-hot-toast"
-import { useIrysUploader } from "../hooks/UploadMetadata"
-import { Button } from "./Button"
+import { Button } from "../lib/Button"
+import { useIrysUploader } from "./UploadMetadata"
 
 function CreatePost() {
   const { uploadMetadata } = useIrysUploader()

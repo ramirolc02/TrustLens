@@ -5,10 +5,11 @@ import {
 import { useAccount as useWagmiAccount } from "wagmi"
 
 import { truncateEthAddress } from "@/utils/truncateEthAddress"
-import { ConnectWalletButton } from "./ConnectWalletButton"
-import { DisconnectWalletButton } from "./DisconnectWalletButton"
-import { LoginForm } from "./LoginForm"
-import { LogoutButton } from "./LogoutButton"
+import DisplayFeed from "../hooks/DisplayFeed"
+import { ConnectWalletButton } from "../lib/ConnectWalletButton"
+import { DisconnectWalletButton } from "../lib/DisconnectWalletButton"
+import { LoginForm } from "../lib/LoginForm"
+import { LogoutButton } from "../lib/LogoutButton"
 
 export function LensLogin() {
   const { isConnected, address } = useWagmiAccount()
@@ -54,6 +55,7 @@ export function LensLogin() {
           .
         </p>
         <LogoutButton />
+        <DisplayFeed profileId={session.profile.id} />
       </>
     )
   }
