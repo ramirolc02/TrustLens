@@ -14,7 +14,7 @@ async function getWebIrys(client: Client<Transport, Chain, Account>) {
     url: "https://devnet.irys.xyz",
     token: "matic",
     wallet: {
-      rpcUrl: "https://rpc-mumbai.maticvigil.com/",
+      rpcUrl: "https://rpc-amoy.polygon.technology/",
       name: "ethersv5",
       provider: new Web3Provider(client.transport),
     },
@@ -25,7 +25,7 @@ async function getWebIrys(client: Client<Transport, Chain, Account>) {
   const balance = await webIrys.getBalance(client.account.address)
 
   if (webIrys.utils.fromAtomic(balance).toNumber() < MIN_FUNDS) {
-    // Fund the account with Mumbai MATIC
+    // Fund the account with Amoy Matic
     await webIrys.fund(webIrys.utils.toAtomic(0.0005))
   }
 
@@ -37,13 +37,7 @@ export function useIrysUploader() {
 
   return {
     uploadMetadata: async (data: unknown) => {
-      const confirm = window.confirm(
-        `In this example we will now upload metadata file via the Bundlr Network.
-    
-    Please make sure your wallet is connected to the Polygon Mumbai testnet.
-    
-    You can get some Mumbai MATIC from the Mumbai Faucet: https://mumbaifaucet.com/`
-      )
+      const confirm = window.confirm(`Subir este mensaje`)
 
       if (!confirm) {
         throw new Error("User cancelled")
