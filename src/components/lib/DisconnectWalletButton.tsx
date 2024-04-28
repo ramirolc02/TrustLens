@@ -1,18 +1,20 @@
-import { useAccount, useDisconnect } from "wagmi";
-import { ButtonAlt } from "./Button";
+import { usePrivy } from "@privy-io/react-auth"
+import { useAccount, useDisconnect } from "wagmi"
+import { ButtonAlt } from "./Button"
 
 export function DisconnectWalletButton() {
-  const { isConnected } = useAccount();
-  const { disconnect } = useDisconnect();
+  const { isConnected } = useAccount()
+  const { disconnect } = useDisconnect()
+  const { ready, authenticated, logout } = usePrivy()
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    disconnect();
-  };
-
-  if (!isConnected) {
-    return null;
+    event.preventDefault()
+    logout()
   }
 
-  return <ButtonAlt onClick={handleClick}>Disconnect</ButtonAlt>;
+  if (ready && !authenticated) {
+    return null
+  }
+
+  return <ButtonAlt onClick={handleClick}>Disconnect</ButtonAlt>
 }

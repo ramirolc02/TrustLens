@@ -1,13 +1,11 @@
+import { truncateEthAddress } from "@/utils/truncateEthAddress"
 import {
   SessionType,
   useSession as useLensSession,
 } from "@lens-protocol/react-web"
 import { useAccount as useWagmiAccount } from "wagmi"
-
-import { truncateEthAddress } from "@/utils/truncateEthAddress"
+import { CreateProfileForm } from "../hooks/CreateProfile"
 import DisplayFeed from "../hooks/DisplayFeed"
-import { ConnectWalletButton } from "../lib/ConnectWalletButton"
-import { DisconnectWalletButton } from "../lib/DisconnectWalletButton"
 import { LoginForm } from "../lib/LoginForm"
 import { LogoutButton } from "../lib/LogoutButton"
 
@@ -22,7 +20,7 @@ export function LensLogin() {
         <p className="mb-4 text-gray-500">
           Connect your wallet to get started.
         </p>
-        <ConnectWalletButton />
+        {/* <ConnectWalletButton /> */}
       </>
     )
   }
@@ -33,12 +31,11 @@ export function LensLogin() {
       <>
         <p className="mb-4 text-gray-500">
           Connected wallet: {truncateEthAddress(address)}
+          Address: {address}
         </p>
         <LoginForm owner={address} />
-
-        <div className="mt-2">
-          <DisconnectWalletButton />
-        </div>
+        <CreateProfileForm wallet={address} />
+        <div className="mt-2">{/* <DisconnectWalletButton /> */}</div>
       </>
     )
   }

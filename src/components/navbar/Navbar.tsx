@@ -8,7 +8,7 @@ const Navbar = () => {
           <div className="flex justify-between items-center h-full">
             <ul className="hidden md:flex gap-x-6 text-white">
               <li>
-                <Link href="/">
+                <Link href="/dashboard">
                   <p>Explore</p>
                 </Link>
               </li>
