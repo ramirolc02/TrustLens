@@ -3,8 +3,8 @@ import {
   SessionType,
   useSession as useLensSession,
 } from "@lens-protocol/react-web"
+import { useWallets } from "@privy-io/react-auth"
 import { useAccount as useWagmiAccount } from "wagmi"
-import { CreateProfileForm } from "../hooks/CreateProfile"
 import DisplayFeed from "../hooks/DisplayFeed"
 import { LoginForm } from "../lib/LoginForm"
 import { LogoutButton } from "../lib/LogoutButton"
@@ -12,6 +12,7 @@ import { LogoutButton } from "../lib/LogoutButton"
 export function LensLogin() {
   const { isConnected, address } = useWagmiAccount()
   const { data: session } = useLensSession()
+  const { wallets } = useWallets()
 
   // step 1. connect wallet
   if (!isConnected) {
@@ -34,7 +35,7 @@ export function LensLogin() {
           Address: {address}
         </p>
         <LoginForm owner={address} />
-        <CreateProfileForm wallet={address} />
+        {/* <CreateProfileForm wallet={address} /> */}
         <div className="mt-2">{/* <DisconnectWalletButton /> */}</div>
       </>
     )

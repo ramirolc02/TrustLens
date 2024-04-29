@@ -64,6 +64,8 @@ const privyConfig: PrivyClientConfig = {
     noPromptOnSignature: false,
   },
   loginMethods: ["wallet", "email", "sms"],
+  defaultChain: polygonAmoy,
+  supportedChains: [polygon, polygonAmoy],
   appearance: {
     showWalletLoginFirst: true,
   },

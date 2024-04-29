@@ -3,6 +3,7 @@ import {
   useLogin,
   useProfilesManaged,
 } from "@lens-protocol/react-web"
+import { CreateProfileForm } from "../hooks/CreateProfile"
 import { Button } from "./Button"
 import { ErrorMessage } from "./ErrorMessage"
 import { Loading } from "./Loading"
@@ -56,9 +57,12 @@ export function LoginForm({
 
   if (profiles.length === 0) {
     return (
-      <p className="mb-4 text-base text-gray-500">
-        No Lens Profiles found in this wallet.
-      </p>
+      <div>
+        <p className="mb-4 text-base text-gray-500">
+          No Lens Profiles found in this wallet.
+        </p>
+        <CreateProfileForm wallet={owner} />
+      </div>
     )
   }
 
