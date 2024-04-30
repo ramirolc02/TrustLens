@@ -1,7 +1,6 @@
 "use client"
 
 import { LensLogin } from "@/components/auth/LensLogin"
-import DisplayPublications from "@/components/hooks/DisplayPublications"
 
 export default function Home() {
   return (
@@ -9,8 +8,6 @@ export default function Home() {
       <div className="flex place-items-center flex-col max-w-lg my-16">
         <h1 className="mb-3 text-3xl font-semibold">Welcome to Social</h1>
         <LensLogin />
-        <div style={{ height: "20px" }}></div>
-        <DisplayPublications />
       </div>
     </main>
   )
