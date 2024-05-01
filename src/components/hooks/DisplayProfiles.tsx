@@ -1,4 +1,3 @@
-// app/page.tsx
 "use client"
 import {
   ExploreProfilesOrderByType,
@@ -7,7 +6,7 @@ import {
 } from "@lens-protocol/react-web"
 import Link from "next/link"
 
-export default function Home() {
+export default function DisplayProfiles() {
   const { data } = useExploreProfiles({
     orderBy: ExploreProfilesOrderByType.MostFollowers,
     limit: LimitType.TwentyFive,

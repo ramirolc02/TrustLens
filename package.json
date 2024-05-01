@@ -17,6 +17,7 @@
     "@lens-protocol/wagmi": "^0.0.0-canary-20240430125244",
     "@tanstack/react-query": "^5.18.1",
     "connectkit": "^1.7.2",
+    "lucide-react": "^0.376.0",
     "next": "^14.1.1",
     "react": "^18",
     "react-dom": "^18",

@@ -1,4 +1,4 @@
-import { textOnly } from "@lens-protocol/metadata"
+import { MediaImageMimeType, image, textOnly } from "@lens-protocol/metadata"
 import { useCreatePost } from "@lens-protocol/react-web"
 import { toast } from "react-hot-toast"
 import { Button } from "../lib/Button"
@@ -12,9 +12,17 @@ function CreatePost() {
     event.preventDefault()
     const form = event.currentTarget
     const formData = new FormData(form)
+
     // create the desired metadata via the `@lens-protocol/metadata` package helpers
     const metadata = textOnly({
       content: formData.get("content") as string,
+    })
+
+    const metadataImage = image({
+      image: {
+        item: "ipfs://...",
+        type: MediaImageMimeType.JPEG,
+      },
     })
 
     // upload the metadata to a storage provider of your choice (IPFS in this example)

@@ -3,6 +3,8 @@ import {
   ExplorePublicationsOrderByType,
   useExplorePublications,
 } from "@lens-protocol/react"
+import { Grab, Heart, MessageSquare, Repeat2 } from "lucide-react"
+import { Button } from "../lib/Button"
 
 export default function ExplorePublications() {
   const { data, error, loading } = useExplorePublications({
@@ -43,6 +45,24 @@ export default function ExplorePublications() {
               Your browser does not support the video tag.
             </video>
           )} */}
+          <div className="flex">
+            <Button className="rounded-full mr-1">
+              <MessageSquare className="mr-2 h-4 w-4" />
+              {publication.stats.comments}
+            </Button>
+            <Button className="rounded-full mr-1">
+              <Repeat2 className="mr-2 h-4 w-4" />
+              {publication.stats.mirrors}
+            </Button>
+            <Button className="rounded-full mr-1">
+              <Heart className="mr-2 h-4 w-4" />
+              {publication.stats.upvotes}
+            </Button>
+            <Button className="rounded-full mr-1">
+              <Grab className="mr-2 h-4 w-4" />
+              {publication.stats.collects}
+            </Button>
+          </div>
         </div>
       ))}
     </ul>
