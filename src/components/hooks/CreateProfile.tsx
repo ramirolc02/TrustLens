@@ -2,13 +2,7 @@ import { useCreateProfile } from "@lens-protocol/react-web"
 
 import toast from "react-hot-toast"
 
-export function CreateProfileForm({
-  address,
-  setprofilesCreated,
-}: {
-  address: string
-  setprofilesCreated: React.Dispatch<React.SetStateAction<boolean>>
-}) {
+export function CreateProfileForm({ address }: { address: string }) {
   const { execute, loading } = useCreateProfile()
 
   const createProfile = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -26,8 +20,6 @@ export function CreateProfileForm({
     }
 
     const profile = result.value
-    setprofilesCreated(true)
-
     return
   }
 

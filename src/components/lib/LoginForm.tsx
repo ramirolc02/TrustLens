@@ -1,6 +1,9 @@
-import { profileId, useLogin, useProfiles } from "@lens-protocol/react-web"
+import {
+  profileId,
+  useLogin,
+  useProfilesManaged,
+} from "@lens-protocol/react-web"
 
-import { useState } from "react"
 import { CreateProfileForm } from "../hooks/CreateProfile"
 import { Button } from "./Button"
 import { ErrorMessage } from "./ErrorMessage"
@@ -14,21 +17,21 @@ export function LoginForm({
   onSuccess?: () => void
 }) {
   const { execute: login, loading: isLoginPending } = useLogin()
-  // const {
-  //   data: profiles,
-  //   error,
-  //   loading,
-  // } = useProfilesManaged({ for: owner, includeOwned: true })
-  const [profilesCreated, setprofilesCreated] = useState(false)
   const {
     data: profiles,
     error,
     loading,
-  } = useProfiles({
-    where: {
-      ownedBy: [owner],
-    },
-  })
+  } = useProfilesManaged({ for: owner, includeOwned: true })
+
+  // const {
+  //   data: profiles,
+  //   error,
+  //   loading,
+  // } = useProfiles({
+  //   where: {
+  //     ownedBy: [owner],
+  //   },
+  // })
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -63,16 +66,13 @@ export function LoginForm({
     return <ErrorMessage error={error} />
   }
 
-  if (profiles.length === 0 && !profilesCreated) {
+  if (profiles.length === 0) {
     return (
       <div>
         <p className="mb-4 text-base text-gray-500">
           No Lens Profiles found in this wallet.
         </p>
-        <CreateProfileForm
-          address={owner}
-          setprofilesCreated={setprofilesCreated}
-        />
+        <CreateProfileForm address={owner} />
       </div>
     )
   }
