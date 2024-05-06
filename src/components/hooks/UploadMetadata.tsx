@@ -9,7 +9,7 @@ function never(message: string): never {
 // const TOP_UP = "200000000000000000" // 0.2 MATIC
 const MIN_FUNDS = 0.05
 
-async function getWebIrys(client: Client<Transport, Chain, Account>) {
+export async function getWebIrys(client: Client<Transport, Chain, Account>) {
   const webIrys = new WebIrys({
     url: "https://devnet.irys.xyz",
     token: "matic",
@@ -37,7 +37,7 @@ export function useIrysUploader() {
 
   return {
     uploadMetadata: async (data: unknown) => {
-      const confirm = window.confirm(`Subir este mensaje`)
+      const confirm = window.confirm(`Almacenar texto en Arweave? `)
 
       if (!confirm) {
         throw new Error("User cancelled")
@@ -48,6 +48,28 @@ export function useIrysUploader() {
       const serialized = JSON.stringify(data)
       const tx = await irys.upload(serialized, {
         tags: [{ name: "Content-Type", value: "application/json" }],
+      })
+
+      return `https://arweave.net/${tx.id}`
+    },
+  }
+}
+
+export function useIrysImageUploader() {
+  const { data: client } = useConnectorClient()
+
+  return {
+    uploadImageMetadata: async (data: File) => {
+      const confirm = window.confirm(`Almacenar imagen en Arweave? `)
+
+      if (!confirm) {
+        throw new Error("User cancelled")
+      }
+
+      const irys = await getWebIrys(client ?? never("viem Client not found"))
+
+      const tx = await irys.uploadFile(data, {
+        tags: [{ name: "Content-Type", value: "image/png" }],
       })
 
       return `https://arweave.net/${tx.id}`
