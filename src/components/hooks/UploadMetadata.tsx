@@ -59,7 +59,7 @@ export function useIrysImageUploader() {
   const { data: client } = useConnectorClient()
 
   return {
-    uploadImageMetadata: async (data: File) => {
+    uploadImage: async (data: File) => {
       const confirm = window.confirm(`Almacenar imagen en Arweave? `)
 
       if (!confirm) {
@@ -68,9 +68,7 @@ export function useIrysImageUploader() {
 
       const irys = await getWebIrys(client ?? never("viem Client not found"))
 
-      const tx = await irys.uploadFile(data, {
-        tags: [{ name: "Content-Type", value: "image/png" }],
-      })
+      const tx = await irys.uploadFile(data)
 
       return `https://arweave.net/${tx.id}`
     },

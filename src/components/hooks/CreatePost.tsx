@@ -11,7 +11,7 @@ function never(message: string): never {
 
 function CreatePost() {
   const { uploadMetadata } = useIrysUploader()
-  const { uploadImageMetadata } = useIrysImageUploader()
+  const { uploadImage } = useIrysImageUploader()
   const { execute, error, loading } = useCreatePost()
   const [file, setFile] = useState<any>()
 
@@ -63,10 +63,12 @@ function CreatePost() {
     const formData = new FormData(form)
     const file = formData.get("file") as File
 
+    console.log(file)
+
     // create the desired metadata via the `@lens-protocol/metadata` package helpers
     const metadataImage = image({
       image: {
-        item: await uploadImageMetadata(file),
+        item: await uploadImage(file),
         type: MediaImageMimeType.PNG,
       },
     })
@@ -167,4 +169,7 @@ export function UseCreatePost() {
       <CreatePost />
     </div>
   )
+}
+function uploadImage(file: File): string | PromiseLike<string> {
+  throw new Error("Function not implemented.")
 }
