@@ -1,50 +1,88 @@
-import { profileId, useLogin, useProfilesManaged } from "@lens-protocol/react-web";
+import {
+  profileId,
+  useLogin,
+  useProfilesManaged,
+} from "@lens-protocol/react-web"
 
-import { ErrorMessage } from "./ErrorMessage";
-import { Loading } from "./Loading";
-import { Button } from "./Button";
+import { CreateProfileForm } from "../hooks/CreateProfile"
+import { Button } from "./Button"
+import { ErrorMessage } from "./ErrorMessage"
+import { Loading } from "./Loading"
 
-export function LoginForm({ owner, onSuccess }: { owner: string; onSuccess?: () => void }) {
-  const { execute: login, loading: isLoginPending } = useLogin();
-  const { data: profiles, error, loading } = useProfilesManaged({ for: owner, includeOwned: true });
+export function LoginForm({
+  owner,
+  onSuccess,
+}: {
+  owner: string
+  onSuccess?: () => void
+}) {
+  const { execute: login, loading: isLoginPending } = useLogin()
+  const {
+    data: profiles,
+    error,
+    loading,
+  } = useProfilesManaged({ for: owner, includeOwned: true })
+
+  // const {
+  //   data: profiles,
+  //   error,
+  //   loading,
+  // } = useProfiles({
+  //   where: {
+  //     ownedBy: [owner],
+  //   },
+  // })
 
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+    event.preventDefault()
 
-    const form = event.currentTarget;
-    const formData = new FormData(form);
+    const form = event.currentTarget
+    const formData = new FormData(form)
 
-    const id = profileId(formData.get("id") as string);
+    const id = profileId(formData.get("id") as string)
 
     const result = await login({
       address: owner,
       profileId: id,
-    });
+    })
 
     if (result.isSuccess()) {
-      console.info(`Welcome ${String(result.value?.handle?.fullHandle ?? result.value?.id)}`);
-      return onSuccess?.();
+      console.info(
+        `Welcome ${String(
+          result.value?.handle?.fullHandle ?? result.value?.id
+        )}`
+      )
+      return onSuccess?.()
     }
 
-    console.error(result.error.message);
-  };
+    console.error(result.error.message)
+  }
 
   if (loading) {
-    return <Loading />;
+    return <Loading />
   }
 
   if (error) {
-    return <ErrorMessage error={error} />;
+    return <ErrorMessage error={error} />
   }
 
   if (profiles.length === 0) {
-    return <p className="mb-4 text-base text-gray-500">No Lens Profiles found in this wallet.</p>;
+    return (
+      <div>
+        <p className="mb-4 text-base text-gray-500">
+          No Lens Profiles found in this wallet.
+        </p>
+        <CreateProfileForm address={owner} />
+      </div>
+    )
   }
 
   return (
     <form onSubmit={onSubmit} className="flex">
       <fieldset className="flex place-items-center flex-col">
-        <legend className="text-base text-gray-500">Select a Lens Profile to login with.</legend>
+        <legend className="text-base text-gray-500">
+          Select a Lens Profile to login with.
+        </legend>
 
         <div className="my-4 space-y-2">
           {profiles.map((profile, idx) => (
@@ -74,5 +112,5 @@ export function LoginForm({ owner, onSuccess }: { owner: string; onSuccess?: () 
         </div>
       </fieldset>
     </form>
-  );
+  )
 }

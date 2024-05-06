@@ -30,16 +30,22 @@ export function LensLogin() {
   // step 2. connect Lens Profile
   if (!session?.authenticated && address) {
     return (
-      <>
+      <div>
         <p className="mb-4 text-gray-500">
           Connected wallet: {truncateEthAddress(address)}
         </p>
-        <LoginForm owner={address} />
-
-        <div className="mt-2">
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <LoginForm owner={address} />
+          <div style={{ height: "5px" }}></div>
           <DisconnectWalletButton />
         </div>
-      </>
+      </div>
     )
   }
 

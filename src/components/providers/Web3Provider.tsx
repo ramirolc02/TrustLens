@@ -57,7 +57,7 @@ const wagmiConfig = createConfig(
 
 const queryClient = new QueryClient()
 
-const lensConfig: LensConfig = {
+export const lensConfig: LensConfig = {
   environment: development, // or production
   bindings: bindings(wagmiConfig),
   ...appConfig.lens,
