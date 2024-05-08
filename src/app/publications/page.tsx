@@ -3,7 +3,7 @@
 import ExplorePublications from "@/components/hooks/DisplayPublications"
 import { useAccount as useWagmiAccount } from "wagmi"
 
-export default function ProfileWrapper() {
+export default function Publications() {
   const { address } = useWagmiAccount()
   if (!address) return null
   return (

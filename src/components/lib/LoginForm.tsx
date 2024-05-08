@@ -23,16 +23,6 @@ export function LoginForm({
     loading,
   } = useProfilesManaged({ for: owner, includeOwned: true })
 
-  // const {
-  //   data: profiles,
-  //   error,
-  //   loading,
-  // } = useProfiles({
-  //   where: {
-  //     ownedBy: [owner],
-  //   },
-  // })
-
   const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
