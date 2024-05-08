@@ -1,5 +1,6 @@
 "use client"
 
+import { PublicationsFrom } from "@/components/hooks/DisplayPublications"
 import { useProfiles } from "@lens-protocol/react-web"
 import Image from "next/image"
 import { useAccount as useWagmiAccount } from "wagmi"
@@ -8,6 +9,7 @@ import profilePic from "../../utils/images/profile.png"
 
 export default function ProfileWrapper() {
   const { address } = useWagmiAccount()
+
   if (!address) return null
 
   return <Profile address={address} />
@@ -26,7 +28,10 @@ function Profile({ address }: { address: string }) {
 
   if (lensConfig.environment.name === "development") {
     return (
-      <main className="px-10 py-14">
+      <main className="px-10 py-14 space-y-4">
+        <h1 className="mb-3 text-3xl font-semibold">
+          Profile: {profile.handle?.localName}
+        </h1>
         <div>
           <a
             rel="no-opener"
@@ -58,6 +63,12 @@ function Profile({ address }: { address: string }) {
               </div>
             </div>
           </a>
+          <h3 className="mb-3 text-2xl font-semibold mt-4">Publications:</h3>
+          {profile?.id ? (
+            <PublicationsFrom profileid={profile.id} />
+          ) : (
+            <div>loading...</div>
+          )}
         </div>
       </main>
     )
@@ -85,6 +96,11 @@ function Profile({ address }: { address: string }) {
                   {profile?.handle?.localName}.{profile?.handle?.namespace}
                 </p>
               </div>
+              {profile?.id ? (
+                <PublicationsFrom profileid={profile.id} />
+              ) : (
+                <div>loading...</div>
+              )}
             </div>
           </a>
         </div>

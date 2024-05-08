@@ -1,4 +1,5 @@
 "use client"
+
 import {
   ExploreProfilesOrderByType,
   LimitType,
@@ -11,14 +12,12 @@ export default function DisplayProfiles() {
     orderBy: ExploreProfilesOrderByType.MostFollowers,
     limit: LimitType.TwentyFive,
   })
-  console.log("data: ", data)
 
   return (
     <div className="p-20">
-      <h1 className="text-5xl">My Lens App</h1>
       {data?.map((profile, index) => (
         <Link
-          href={`/profile/${profile.handle?.localName}.${profile.handle?.namespace}`}
+          href={`/profiles/${profile.handle?.localName}.${profile.handle?.namespace}`}
           key={index}
         >
           <div className="my-14">
