@@ -9,7 +9,6 @@ export default function Profile({ params }: { params: { handle: string } }) {
   const { data: profile, loading } = useProfile({
     forHandle: `lens/${handleFormat}`,
   })
-  console.log(params.handle)
 
   return (
     <main className="px-10 py-14">

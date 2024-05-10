@@ -13,8 +13,8 @@
   "dependencies": {
     "@irys/sdk": "^0.1.16",
     "@lens-protocol/metadata": "^1.1.6",
-    "@lens-protocol/react-web": "^0.0.0-canary-20240430125244",
-    "@lens-protocol/wagmi": "^0.0.0-canary-20240430125244",
+    "@lens-protocol/react-web": "^2.2.0",
+    "@lens-protocol/wagmi": "^4.1.2",
     "@tanstack/react-query": "^5.18.1",
     "connectkit": "^1.7.2",
     "lucide-react": "^0.376.0",

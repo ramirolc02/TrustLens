@@ -1,6 +1,10 @@
 "use client"
 
 import { PublicationsFrom } from "@/components/hooks/DisplayPublications"
+import {
+  ProfileFollowers,
+  ProfileFollowing,
+} from "@/components/hooks/ProfileFollowersAndFollowing"
 import { useProfiles } from "@lens-protocol/react-web"
 import Image from "next/image"
 import { useAccount as useWagmiAccount } from "wagmi"
@@ -39,21 +43,27 @@ function Profile({ address }: { address: string }) {
             href={`https://testnet.hey.xyz/u/${profile.handle?.localName}`}
           >
             <div className="border rounded-lg p-10">
-              <div>
-                {profile.metadata?.picture?.__typename === "ImageSet" && (
-                  <Image
-                    src={profile?.metadata?.picture?.optimized?.uri ?? ""}
-                    className="rounded w-[200px]"
-                    alt={"Lens Profile Picture"}
-                  />
-                )}
-                {!profile.metadata?.picture && (
-                  <Image
-                    src={profilePic}
-                    className="rounded w-[200px]"
-                    alt={"Profile Picture"}
-                  />
-                )}
+              <div className="flex">
+                <div>
+                  {profile.metadata?.picture?.__typename === "ImageSet" && (
+                    <Image
+                      src={profile?.metadata?.picture?.optimized?.uri ?? ""}
+                      className="rounded w-[200px]"
+                      alt={"Lens Profile Picture"}
+                    />
+                  )}
+                  {!profile.metadata?.picture && (
+                    <Image
+                      src={profilePic}
+                      className="rounded w-[200px]"
+                      alt={"Profile Picture"}
+                    />
+                  )}
+                </div>
+                <div className="ml-20">
+                  <ProfileFollowers profileid={profile.id} />
+                  <ProfileFollowing profileid={profile.id} />
+                </div>
               </div>
               <div className="mt-4">
                 <p className="text-lg">{profile?.metadata?.displayName}</p>

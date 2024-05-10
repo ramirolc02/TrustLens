@@ -36,6 +36,15 @@ function CreatePost() {
     const result = await execute({
       metadata: await uploadMetadata(metadata),
       sponsored: formData.get("sponsored") === "on",
+      // actions: [
+      //   {
+      //     type: OpenActionType.SIMPLE_COLLECT,
+      //     amount: Amount.erc20(getAmoyCurrency(), 100), // 100 WMATIC
+      //     followerOnly: true,
+      //     collectLimit: 10,
+      //     recipient: '0x4f94FAFEE38F545920485fC747467EFc85C302E0',
+      //     endsAt: new Date('2025-12-31T00:00:00.000Z'),
+      //   }
     })
 
     if (result.isFailure()) {
@@ -169,7 +178,4 @@ export function UseCreatePost() {
       <CreatePost />
     </div>
   )
-}
-function uploadImage(file: File): string | PromiseLike<string> {
-  throw new Error("Function not implemented.")
 }
