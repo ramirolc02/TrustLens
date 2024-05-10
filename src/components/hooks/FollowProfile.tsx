@@ -1,3 +1,4 @@
+"use client"
 import {
   BroadcastingError,
   InsufficientAllowanceError,
@@ -13,6 +14,7 @@ import {
   useFollow,
   useUnfollow,
 } from "@lens-protocol/react-web"
+import { useRouter } from "next/navigation"
 import toast from "react-hot-toast"
 import { Button } from "../lib/Button"
 
@@ -60,6 +62,7 @@ function handleFollowError(
 }
 
 export default function FollowButton({ profile }: { profile: Profile }) {
+  const router = useRouter()
   const {
     execute: executeFollow,
     error: followError,
@@ -85,6 +88,7 @@ export default function FollowButton({ profile }: { profile: Profile }) {
       return handleFollowError(completion.error)
     }
     toast.success("Followed successfully")
+    router.prefetch("/profile")
   }
 
   const unfollow = async () => {
@@ -100,6 +104,7 @@ export default function FollowButton({ profile }: { profile: Profile }) {
       return handleFollowError(completion.error)
     }
     toast.success("Unfollowed successfully")
+    router.prefetch("/profile")
   }
 
   if (profile.operations.isFollowedByMe.value) {
@@ -135,7 +140,7 @@ export default function FollowButton({ profile }: { profile: Profile }) {
             : "Unfollow en proceso"
         }
       >
-        Seguir Perfil
+        Follow Profile
       </Button>
       &nbsp;
       {followError && <p>{followError.message}</p>}
