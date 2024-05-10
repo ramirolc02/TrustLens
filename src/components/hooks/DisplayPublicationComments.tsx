@@ -30,8 +30,8 @@ export function CommentsOnPublication({
 
   return (
     <div>
-      {comments.map((comment) => (
-        <section>
+      {comments.map((comment, index) => (
+        <section key={index}>
           <div
             style={{
               display: "flex",
