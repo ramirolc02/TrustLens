@@ -1,5 +1,5 @@
 import { MediaImageMimeType, image, textOnly } from "@lens-protocol/metadata"
-import { useCreatePost } from "@lens-protocol/react-web"
+import { OpenActionType, useCreatePost } from "@lens-protocol/react-web"
 import { useState } from "react"
 import { toast } from "react-hot-toast"
 import { Button } from "../lib/Button"
@@ -14,6 +14,7 @@ function CreatePost() {
   const { uploadImage } = useIrysImageUploader()
   const { execute, error, loading } = useCreatePost()
   const [file, setFile] = useState<any>()
+  const [content, setContent] = useState<string>("")
 
   async function handleFileChange(e: any) {
     e.preventDefault()
@@ -36,15 +37,13 @@ function CreatePost() {
     const result = await execute({
       metadata: await uploadMetadata(metadata),
       sponsored: formData.get("sponsored") === "on",
-      // actions: [
-      //   {
-      //     type: OpenActionType.SIMPLE_COLLECT,
-      //     amount: Amount.erc20(getAmoyCurrency(), 100), // 100 WMATIC
-      //     followerOnly: true,
-      //     collectLimit: 10,
-      //     recipient: '0x4f94FAFEE38F545920485fC747467EFc85C302E0',
-      //     endsAt: new Date('2025-12-31T00:00:00.000Z'),
-      //   }
+      actions: [
+        {
+          type: OpenActionType.SIMPLE_COLLECT,
+          followerOnly: true,
+          collectLimit: 5,
+        },
+      ],
     })
 
     if (result.isFailure()) {
@@ -60,7 +59,7 @@ function CreatePost() {
       toast.error(completion.error.message)
       return
     }
-    // post was created
+    setContent("")
     const post = completion.value
     toast.success(`Post ID: ${post.id}`)
   }
@@ -102,12 +101,14 @@ function CreatePost() {
       return
     }
     // post was created
+    setFile(undefined)
     const post = completion.value
     toast.success(`Post ID: ${post.id}`)
   }
 
   return (
     <main>
+      <h1>Create Post</h1>
       <form onSubmit={post}>
         <fieldset>
           <textarea
@@ -118,6 +119,8 @@ function CreatePost() {
             placeholder="Texto..."
             style={{ resize: "none", color: "black" }}
             disabled={loading}
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
           ></textarea>
 
           <label>
@@ -138,6 +141,7 @@ function CreatePost() {
           {!loading && error && <pre>{error.message}</pre>}
         </fieldset>
       </form>
+      <h1>Create Image Post</h1>
       <form onSubmit={postImage}>
         <fieldset>
           <input
@@ -172,9 +176,6 @@ function CreatePost() {
 export function UseCreatePost() {
   return (
     <div>
-      <h1>
-        <code>Create a Post </code>
-      </h1>
       <CreatePost />
     </div>
   )
