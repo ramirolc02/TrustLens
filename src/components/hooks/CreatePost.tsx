@@ -51,7 +51,7 @@ function CreatePost() {
       return
     }
 
-    toast.success(`Post broadcasted, waiting for completion...`)
+    toast.success(`Text Post broadcasted, waiting...`)
 
     const completion = await result.value.waitForCompletion()
 
@@ -92,7 +92,7 @@ function CreatePost() {
       return
     }
 
-    toast.success(`Post broadcasted, waiting for completion...`)
+    toast.success(`Image Post broadcasted, waiting...`)
 
     const completion = await result.value.waitForCompletion()
 
@@ -108,7 +108,7 @@ function CreatePost() {
 
   return (
     <main>
-      <h1>Create Post</h1>
+      <h1>Create Text Post</h1>
       <form onSubmit={post}>
         <fieldset>
           <textarea
@@ -129,7 +129,7 @@ function CreatePost() {
               name="sponsored"
               disabled={loading}
               value="on"
-              defaultChecked={true}
+              defaultChecked={false}
             />
             sponsored
           </label>
@@ -157,7 +157,7 @@ function CreatePost() {
               name="sponsored"
               disabled={loading}
               value="on"
-              defaultChecked={true}
+              defaultChecked={false}
             />
             sponsored
           </label>

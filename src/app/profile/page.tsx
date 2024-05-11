@@ -73,7 +73,9 @@ function Profile({ address }: { address: string }) {
               </div>
             </div>
           </a>
-          <h3 className="mb-3 text-2xl font-semibold mt-4">Publications:</h3>
+          <h3 className="mb-3 text-2xl font-semibold mt-4">
+            Personal Publications:
+          </h3>
           {profile?.id ? (
             <PublicationsFrom profileid={profile.id} />
           ) : (
