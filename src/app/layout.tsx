@@ -1,6 +1,5 @@
 import Navbar from "@/components/navbar/Navbar"
 import { Web3Provider } from "@/components/providers/Web3Provider"
-import { NextUIProvider } from "@nextui-org/react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import { Toaster } from "react-hot-toast"
@@ -22,10 +21,8 @@ export default function RootLayout({
       <body className={inter.className}>
         <Web3Provider>
           <Navbar />
-          <NextUIProvider>
-            <Toaster position="bottom-center" />
-            {children}
-          </NextUIProvider>
+          <Toaster position="bottom-center" />
+          {children}
         </Web3Provider>
       </body>
     </html>
