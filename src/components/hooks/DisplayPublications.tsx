@@ -10,10 +10,11 @@ import {
   profileId,
   usePublications,
 } from "@lens-protocol/react-web"
-import { MessageSquare, Repeat2 } from "lucide-react"
+import { MessageSquare } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { Button } from "../lib/Button"
 import { CollectPublication } from "./CollectPublication"
+import { CreateMirror } from "./MirrorPublication"
 
 export default function ExplorePublications() {
   const { data, error, loading } = useExplorePublications({
@@ -65,10 +66,14 @@ export default function ExplorePublications() {
               <MessageSquare className="mr-2 h-4 w-4" />
               {publication.stats.comments}
             </Button>
-            <Button className="rounded-full mr-1">
+            {/* <Button className="rounded-full mr-1">
               <Repeat2 className="mr-2 h-4 w-4" />
               {publication.stats.mirrors}
-            </Button>
+            </Button> */}
+            <CreateMirror
+              publicationId={publication.id}
+              publication={publication}
+            />
             <LikeReaction publication={publication} />
             <CollectPublication publication={publication} />
           </div>
@@ -122,10 +127,10 @@ export function PublicationsFrom({ profileid }: { profileid: string }) {
               <MessageSquare className="mr-2 h-4 w-4" />
               {publication.stats.comments}
             </Button>
-            <Button className="rounded-full mr-1">
-              <Repeat2 className="mr-2 h-4 w-4" />
-              {publication.stats.mirrors}
-            </Button>
+            <CreateMirror
+              publicationId={publication.id}
+              publication={publication}
+            />
             <LikeReaction publication={publication} />
             <CollectPublication publication={publication} />
           </div>
