@@ -4,6 +4,7 @@ import {
   useProfilesManaged,
 } from "@lens-protocol/react-web"
 
+import toast from "react-hot-toast"
 import { CreateProfileForm } from "../hooks/CreateProfile"
 import { Button } from "./Button"
 import { ErrorMessage } from "./ErrorMessage"
@@ -42,6 +43,7 @@ export function LoginForm({
           result.value?.handle?.fullHandle ?? result.value?.id
         )}`
       )
+      toast.success(`Welcome ${String(result.value?.handle?.fullHandle)}`)
       return onSuccess?.()
     }
 
@@ -57,6 +59,9 @@ export function LoginForm({
   }
 
   if (profiles.length === 0) {
+    toast(
+      "No Lens Profiles found in this wallet. Create one using the form below."
+    )
     return (
       <div>
         <p className="mb-4 text-base text-gray-500">
