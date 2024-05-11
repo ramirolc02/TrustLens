@@ -4,6 +4,7 @@ import {
   useReactionToggle,
 } from "@lens-protocol/react-web"
 import { Heart } from "lucide-react"
+import toast from "react-hot-toast"
 import { Button } from "../lib/Button"
 
 export function LikeReaction({
@@ -18,6 +19,7 @@ export function LikeReaction({
       reaction: PublicationReactionType.Upvote,
       publication,
     })
+    toast.success("Like added")
   }
 
   if (error) {

@@ -58,6 +58,7 @@ export function CreateMirror({
       }
       return
     }
+
     const completion = await result.value.waitForCompletion()
 
     if (completion.isFailure()) {
@@ -69,6 +70,7 @@ export function CreateMirror({
       return
     }
     const mirror = completion.value
+    toast.success(`Publication mirrored: ${mirror.id}`)
   }
 
   return (
