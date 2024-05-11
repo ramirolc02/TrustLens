@@ -29,7 +29,21 @@ export default function ExplorePublications({
   })
   const router = useRouter()
 
-  if (loading) return <p>Loading...</p>
+  if (loading)
+    return (
+      <div
+        style={{
+          width: "100vw",
+          height: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          fontSize: "20px",
+        }}
+      >
+        Loading Publications of type {type}...
+      </div>
+    )
 
   if (error) return <p>Error: {error.message}</p>
 
