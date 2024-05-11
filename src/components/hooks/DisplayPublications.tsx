@@ -16,12 +16,16 @@ import { Button } from "../lib/Button"
 import { CollectPublication } from "./CollectPublication"
 import { CreateMirror } from "./MirrorPublication"
 
-export default function ExplorePublications() {
+export default function ExplorePublications({
+  type,
+}: {
+  type: ExplorePublicationsOrderByType
+}) {
   const { data, error, loading } = useExplorePublications({
     where: {
       publicationTypes: [ExplorePublicationType.Post],
     },
-    orderBy: ExplorePublicationsOrderByType.TopCommented,
+    orderBy: type,
   })
   const router = useRouter()
 
