@@ -36,12 +36,13 @@ export default function ExplorePublications({
           width: "100vw",
           height: "100vh",
           display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          alignItems: "flex-start",
           fontSize: "20px",
+          flexDirection: "column",
+          fontWeight: "bold",
         }}
       >
-        Loading Publications of type {type}...
+        <p>Loading Publications of type: {type}...</p>
       </div>
     )
 
