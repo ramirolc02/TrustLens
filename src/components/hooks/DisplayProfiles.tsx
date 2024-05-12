@@ -16,10 +16,9 @@ export default function DisplayProfiles() {
   return (
     <div className=" p-10">
       {data?.map((profile, index) => (
-        <div className="border rounded-lg p-10 mb-4">
+        <div key={index} className="border rounded-lg p-10 mb-4">
           <Link
             href={`/profiles/${profile.handle?.localName}.${profile.handle?.namespace}`}
-            key={index}
           >
             <div className="my-14">
               {profile.metadata?.picture?.__typename === "ImageSet" ? (
