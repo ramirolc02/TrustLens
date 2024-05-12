@@ -11,7 +11,7 @@ export default function Drop({ setType }: { setType: any }) {
   return (
     <Dropdown>
       <DropdownTrigger>
-        <Button variant="solid" color="default">
+        <Button variant="solid" color="primary">
           Select Posts
         </Button>
       </DropdownTrigger>
@@ -21,7 +21,6 @@ export default function Drop({ setType }: { setType: any }) {
           onClick={() => {
             setType(ExplorePublicationsOrderByType.Latest)
           }}
-          style={{ color: "black" }}
         >
           Latest
         </DropdownItem>
@@ -30,7 +29,6 @@ export default function Drop({ setType }: { setType: any }) {
           onClick={() => {
             setType(ExplorePublicationsOrderByType.TopCommented)
           }}
-          style={{ color: "black" }}
         >
           Most Comments
         </DropdownItem>
@@ -39,7 +37,6 @@ export default function Drop({ setType }: { setType: any }) {
           onClick={() => {
             setType(ExplorePublicationsOrderByType.TopReacted)
           }}
-          style={{ color: "black" }}
         >
           Most Reactions
         </DropdownItem>
@@ -48,7 +45,6 @@ export default function Drop({ setType }: { setType: any }) {
           onClick={() => {
             setType(ExplorePublicationsOrderByType.TopMirrored)
           }}
-          style={{ color: "black" }}
         >
           Most Mirrored
         </DropdownItem>
@@ -57,7 +53,6 @@ export default function Drop({ setType }: { setType: any }) {
           onClick={() => {
             setType(ExplorePublicationsOrderByType.TopCollectedOpenAction)
           }}
-          style={{ color: "black" }}
         >
           Most Collects
         </DropdownItem>

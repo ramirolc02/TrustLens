@@ -15,10 +15,10 @@ export default function Publications() {
   return (
     <div>
       <main className="px-10 py-14">
-        <div>
-          <h1 className="mb-3 text-3xl font-semibold">Explore Publications</h1>
+        <div className="flex items-center justify-between mb-3">
+          <h1 className="text-3xl font-semibold">Explore Publications</h1>
+          <Drop setType={setType} />
         </div>
-        <Drop setType={setType} />
         <ExplorePublications type={type} />
       </main>
     </div>
