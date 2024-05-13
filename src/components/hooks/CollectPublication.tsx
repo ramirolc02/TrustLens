@@ -1,9 +1,11 @@
 import {
   OpenActionKind,
   PrimaryPublication,
+  TriStateValue,
   useOpenAction,
 } from "@lens-protocol/react-web"
 import { Grab } from "lucide-react"
+import toast from "react-hot-toast"
 import { Button } from "../lib/Button"
 
 export function CollectPublication({
@@ -17,73 +19,24 @@ export function CollectPublication({
     },
   })
 
-  const collect = async (
-    event: React.MouseEvent,
-    publication: PrimaryPublication
-  ) => {
+  const collect = async (event: React.MouseEvent) => {
     event.preventDefault()
 
     const result = await execute({ publication })
 
     if (result.isFailure()) {
-      switch (result.error.name) {
-        case "BroadcastingError":
-          console.log(
-            "There was an error broadcasting the transaction",
-            error?.message
-          )
-          break
-
-        case "PendingSigningRequestError":
-          console.log(
-            "There is a pending signing request in your wallet. " +
-              "Approve it or discard it and try again."
-          )
-          break
-
-        case "InsufficientAllowanceError":
-          const requestedAmount = result.error.requestedAmount
-          console.log(
-            "You must approve the contract to spend at least: " +
-              `${
-                requestedAmount.asset.symbol
-              } ${requestedAmount.toSignificantDigits(6)}`
-          )
-          break
-
-        case "InsufficientFundsError":
-          const requestedAmount1 = result.error.requestedAmount
-          console.log(
-            "You do not have enough funds to pay for this collect fee: " +
-              `${
-                requestedAmount1.asset.symbol
-              } ${requestedAmount1.toSignificantDigits(6)}`
-          )
-          break
-
-        case "WalletConnectionError":
-          console.log(
-            "There was an error connecting to your wallet",
-            error?.message
-          )
-          break
-
-        case "UserRejectedError":
-          // the user decided to not sign, usually this is silently ignored by UIs
-          break
-      }
+      toast.error(result.error.message)
       return
     }
 
     const completion = await result.value.waitForCompletion()
 
     if (completion.isFailure()) {
-      console.log(
-        "There was an processing the transaction",
-        completion.error.message
-      )
+      toast.error(completion.error.message)
       return
     }
+
+    toast.success(`Collected: ${publication.id}`)
 
     console.log("Open action executed successfully")
   }
@@ -91,8 +44,10 @@ export function CollectPublication({
   return (
     <div>
       <Button
-        onClick={(event) => collect(event, publication)}
-        disabled={loading}
+        onClick={(event) => collect(event)}
+        disabled={
+          loading && publication.operations.canCollect === TriStateValue.No
+        }
         className="rounded-full mr-1"
       >
         <Grab className="mr-2 h-4 w-4" />

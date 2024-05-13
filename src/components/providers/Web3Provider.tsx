@@ -7,6 +7,7 @@ import {
   production,
 } from "@lens-protocol/react-web"
 import { bindings } from "@lens-protocol/wagmi"
+import { NextUIProvider } from "@nextui-org/react"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 import { ConnectKitProvider, getDefaultConfig } from "connectkit"
 import React from "react"
@@ -65,12 +66,14 @@ export const lensConfig: LensConfig = {
 
 export function Web3Provider({ children }: { children: React.ReactNode }) {
   return (
-    <WagmiProvider config={wagmiConfig}>
-      <QueryClientProvider client={queryClient}>
-        <ConnectKitProvider>
-          <LensProvider config={lensConfig}>{children}</LensProvider>
-        </ConnectKitProvider>
-      </QueryClientProvider>
-    </WagmiProvider>
+    <NextUIProvider>
+      <WagmiProvider config={wagmiConfig}>
+        <QueryClientProvider client={queryClient}>
+          <ConnectKitProvider>
+            <LensProvider config={lensConfig}>{children}</LensProvider>
+          </ConnectKitProvider>
+        </QueryClientProvider>
+      </WagmiProvider>
+    </NextUIProvider>
   )
 }

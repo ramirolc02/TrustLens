@@ -4,10 +4,11 @@ import { UseCreatePost } from "@/components/hooks/CreatePost"
 
 export default function CreatePost() {
   return (
-    <div className="flex justify-center items-center h-screen">
+    <main className="flex min-h-screen flex-col p-8 lg:p-16">
       <RequireConnectedWallet>
+        <h1 className="mb-3 text-3xl font-semibold">Create Publications</h1>
         <UseCreatePost />
       </RequireConnectedWallet>
-    </div>
+    </main>
   )
 }
