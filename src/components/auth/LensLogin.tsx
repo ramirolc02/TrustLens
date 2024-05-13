@@ -1,3 +1,4 @@
+"use client"
 import {
   SessionType,
   useSession as useLensSession,
@@ -63,7 +64,5 @@ export function LensLogin() {
       </>
     )
   }
-
-  // you can handle other session types here
   return null
 }

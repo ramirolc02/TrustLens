@@ -1,3 +1,4 @@
+"use client"
 import { MediaImageMimeType, image, textOnly } from "@lens-protocol/metadata"
 import { OpenActionType, useCreatePost } from "@lens-protocol/react-web"
 import { useState } from "react"

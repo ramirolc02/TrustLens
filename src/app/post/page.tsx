@@ -1,4 +1,3 @@
-"use client"
 import { RequireConnectedWallet } from "@/components/auth/RequireWallet"
 import { UseCreatePost } from "@/components/hooks/CreatePost"
 

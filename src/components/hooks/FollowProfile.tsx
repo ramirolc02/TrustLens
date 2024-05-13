@@ -16,6 +16,7 @@ import {
 } from "@lens-protocol/react-web"
 import { useRouter } from "next/navigation"
 import toast from "react-hot-toast"
+import { RequireConnectedWallet } from "../auth/RequireWallet"
 import { Button } from "../lib/Button"
 
 function handleFollowError(
@@ -110,40 +111,45 @@ export default function FollowButton({ profile }: { profile: Profile }) {
   if (profile.operations.isFollowedByMe.value) {
     return (
       <>
-        <Button
-          onClick={unfollow}
-          disabled={isUnfollowLoading || !profile.operations.canUnfollow}
-          title={
-            profile.operations.canUnfollow
-              ? "Click to unfollow"
-              : "Follow request not finalized yet"
-          }
-        >
-          Unfollow
-        </Button>
-        &nbsp;
-        {unfollowError && <p>{unfollowError.message}</p>}
+        <RequireConnectedWallet>
+          <Button
+            onClick={unfollow}
+            disabled={isUnfollowLoading || !profile.operations.canUnfollow}
+            title={
+              profile.operations.canUnfollow
+                ? "Click to unfollow"
+                : "Follow request not finalized yet"
+            }
+          >
+            Unfollow
+          </Button>
+          &nbsp;
+          {unfollowError && <p>{unfollowError.message}</p>}
+        </RequireConnectedWallet>
       </>
     )
   }
 
   return (
     <>
-      <Button
-        onClick={paidFollow}
-        disabled={
-          isFollowLoading || profile.operations.canFollow !== TriStateValue.Yes
-        }
-        title={
-          profile.operations.canFollow === TriStateValue.Yes
-            ? "Seguir usuario"
-            : "Unfollow en proceso"
-        }
-      >
-        Follow Profile
-      </Button>
-      &nbsp;
-      {followError && <p>{followError.message}</p>}
+      <RequireConnectedWallet>
+        <Button
+          onClick={paidFollow}
+          disabled={
+            isFollowLoading ||
+            profile.operations.canFollow !== TriStateValue.Yes
+          }
+          title={
+            profile.operations.canFollow === TriStateValue.Yes
+              ? "Seguir usuario"
+              : "Unfollow en proceso"
+          }
+        >
+          Follow Profile
+        </Button>
+        &nbsp;
+        {followError && <p>{followError.message}</p>}
+      </RequireConnectedWallet>
     </>
   )
 }
