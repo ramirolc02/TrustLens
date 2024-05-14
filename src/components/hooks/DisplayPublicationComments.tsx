@@ -40,7 +40,6 @@ export function CommentsOnPublication({
               gap: "2rem",
             }}
           >
-            {/* <ProfilePicture picture={comment.by.metadata?.picture ?? null} /> */}
             <p>{formatProfileIdentifier(comment.by)}</p>
           </div>
           {comment.metadata.__typename === "TextOnlyMetadataV3" ? (

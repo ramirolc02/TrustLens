@@ -1,3 +1,4 @@
+"use client"
 import { ReactNode } from "react"
 import { useAccount, useConnect } from "wagmi"
 import { injected } from "wagmi/connectors"
@@ -32,7 +33,7 @@ export function RequireConnectedWallet({
         disabled={isConnecting}
         onClick={() => connect({ connector: injected() })}
       >
-        Connect first
+        Connect your wallet first
       </Button>
     </div>
   )

@@ -1,5 +1,6 @@
 import { textOnly } from "@lens-protocol/metadata"
 import { PublicationId, useCreateComment } from "@lens-protocol/react-web"
+import { RequireConnectedWallet } from "../auth/RequireWallet"
 import { Button } from "../lib/Button"
 import { useIrysUploader } from "./UploadMetadata"
 
@@ -52,36 +53,38 @@ function CreateComment({ publicationId }: { publicationId: PublicationId }) {
   }
   return (
     <main>
-      <form onSubmit={comment}>
-        <fieldset>
-          <textarea
-            name="content"
-            minLength={1}
-            required
-            rows={3}
-            placeholder="Leave a comment..."
-            style={{ resize: "none", color: "black" }}
-            disabled={loading}
-          ></textarea>
-
-          <label>
-            <input
-              type="checkbox"
-              name="sponsored"
+      <RequireConnectedWallet>
+        <form onSubmit={comment}>
+          <fieldset>
+            <textarea
+              name="content"
+              minLength={1}
+              required
+              rows={3}
+              placeholder="Leave a comment..."
+              style={{ resize: "none", color: "black" }}
               disabled={loading}
-              value="on"
-              defaultChecked={true}
-            />
-            sponsored
-          </label>
+            ></textarea>
 
-          <Button type="submit" disabled={loading}>
-            Post comment
-          </Button>
+            <label>
+              <input
+                type="checkbox"
+                name="sponsored"
+                disabled={loading}
+                value="on"
+                defaultChecked={true}
+              />
+              sponsored
+            </label>
 
-          {!loading && error && <pre>{error.message}</pre>}
-        </fieldset>
-      </form>
+            <Button type="submit" disabled={loading}>
+              Post comment
+            </Button>
+
+            {!loading && error && <pre>{error.message}</pre>}
+          </fieldset>
+        </form>
+      </RequireConnectedWallet>
     </main>
   )
 }
