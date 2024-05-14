@@ -17,6 +17,7 @@ export default function Profile({ params }: { params: { handle: string } }) {
           Explore {profile?.handle?.localName}.{profile?.handle?.namespace}{" "}
           Profile
         </h1>
+
         <div className="my-14">
           {profile?.metadata?.picture?.__typename === "ImageSet" ? (
             <img
