@@ -54,20 +54,6 @@ export default function ExplorePublications({
                 src={publication.metadata?.asset?.image?.optimized?.uri}
               />
             )}
-            {/* {publication.metadata?.asset?.video?.uri && (
-            <video
-              width="400"
-              height="400"
-              className="rounded-xl mt-6 mb-2"
-              controls
-            >
-              <source
-                src={publication.metadata?.asset?.video?.uri}
-                type="video/mp4"
-              />
-              Your browser does not support the video tag.
-            </video>
-          )} */}
             <div className="flex">
               <Button
                 className="rounded-full mr-1"
@@ -76,10 +62,7 @@ export default function ExplorePublications({
                 <MessageSquare className="mr-2 h-4 w-4" />
                 {publication.stats.comments}
               </Button>
-              {/* <Button className="rounded-full mr-1">
-              <Repeat2 className="mr-2 h-4 w-4" />
-              {publication.stats.mirrors}
-            </Button> */}
+
               <CreateMirror
                 publicationId={publication.id}
                 publication={publication}
@@ -121,22 +104,11 @@ export function PublicationsFrom({ profileid }: { profileid: string }) {
               src={publication.metadata?.asset?.image?.optimized?.uri}
             />
           )}
-          {/* {publication.metadata?.asset?.video?.uri && (
-            <video
-              width="400"
-              height="400"
-              className="rounded-xl mt-6 mb-2"
-              controls
-            >
-              <source
-                src={publication.metadata?.asset?.video?.uri}
-                type="video/mp4"
-              />
-              Your browser does not support the video tag.
-            </video>
-          )} */}
           <div className="flex">
-            <Button className="rounded-full mr-1">
+            <Button
+              className="rounded-full mr-1"
+              onClick={() => router.push(`/publications/${publication.id}`)}
+            >
               <MessageSquare className="mr-2 h-4 w-4" />
               {publication.stats.comments}
             </Button>
