@@ -62,7 +62,7 @@ function CreateComment({ publicationId }: { publicationId: PublicationId }) {
               required
               rows={3}
               placeholder="Leave a comment..."
-              style={{ resize: "none", color: "black" }}
+              style={{ resize: "none" }}
               disabled={loading}
             ></textarea>
 
