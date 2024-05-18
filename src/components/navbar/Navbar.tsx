@@ -19,7 +19,7 @@ const restrictedNavigation: NavigationItem[] = [
 ]
 const fullNavigation: NavigationItem[] = [
   { href: "/", name: "Home" },
-  { href: "/profile", name: "Profile" },
+  { href: "/myprofile", name: "Profile" },
   { href: "/post", name: "Post" },
   { href: "/profiles", name: "Profiles" },
   { href: "/publications", name: "Publications" },

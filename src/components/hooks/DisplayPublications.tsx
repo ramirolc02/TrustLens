@@ -106,6 +106,8 @@ export function PublicationsFrom({ profileid }: { profileid: string }) {
 
   if (error) return <p>Error: {error.message}</p>
 
+  const router = useRouter()
+
   return (
     <ul>
       {data.map((publication: any, index: number) => (
@@ -134,7 +136,10 @@ export function PublicationsFrom({ profileid }: { profileid: string }) {
             </video>
           )} */}
           <div className="flex">
-            <Button className="rounded-full mr-1">
+            <Button
+              className="rounded-full mr-1"
+              onClick={() => router.push(`/publications/${publication.id}`)}
+            >
               <MessageSquare className="mr-2 h-4 w-4" />
               {publication.stats.comments}
             </Button>
