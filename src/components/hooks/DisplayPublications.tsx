@@ -85,11 +85,11 @@ export function PublicationsFrom({ profileid }: { profileid: string }) {
     },
   })
 
+  const router = useRouter()
+
   if (loading) return <p>Loading...</p>
 
   if (error) return <p>Error: {error.message}</p>
-
-  const router = useRouter()
 
   return (
     <ul>
