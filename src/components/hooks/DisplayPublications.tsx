@@ -136,10 +136,7 @@ export function PublicationsFrom({ profileid }: { profileid: string }) {
             </video>
           )} */}
           <div className="flex">
-            <Button
-              className="rounded-full mr-1"
-              onClick={() => router.push(`/publications/${publication.id}`)}
-            >
+            <Button className="rounded-full mr-1">
               <MessageSquare className="mr-2 h-4 w-4" />
               {publication.stats.comments}
             </Button>
