@@ -59,9 +59,6 @@ export function LoginForm({
   }
 
   if (profiles.length === 0) {
-    toast(
-      "No Lens Profiles found in this wallet. Create one using the form below."
-    )
     return (
       <div>
         <p className="mb-4 text-base text-gray-500">

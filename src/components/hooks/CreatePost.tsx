@@ -118,7 +118,7 @@ function CreatePost() {
             required
             rows={3}
             placeholder="Texto..."
-            style={{ resize: "none", color: "black" }}
+            style={{ resize: "none" }}
             disabled={loading}
             value={content}
             onChange={(e) => setContent(e.target.value)}

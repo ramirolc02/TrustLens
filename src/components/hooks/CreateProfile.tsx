@@ -1,5 +1,4 @@
 import { useCreateProfile } from "@lens-protocol/react-web"
-
 import toast from "react-hot-toast"
 import { Button } from "../lib/Button"
 
@@ -36,7 +35,6 @@ export function CreateProfileForm({ address }: { address: string }) {
               name="localName"
               placeholder="your-handle"
               disabled={loading}
-              style={{ color: "black" }}
             />
           </div>
         </label>
