@@ -1,6 +1,7 @@
 import { useCreateProfile } from "@lens-protocol/react-web"
 
 import toast from "react-hot-toast"
+import { Button } from "../lib/Button"
 
 export function CreateProfileForm({ address }: { address: string }) {
   const { execute, loading } = useCreateProfile()
@@ -46,7 +47,7 @@ export function CreateProfileForm({ address }: { address: string }) {
             justifyContent: "flex-end",
           }}
         >
-          <button disabled={loading}>Submit</button>
+          <Button disabled={loading}>Submit</Button>
         </div>
       </fieldset>
     </form>
