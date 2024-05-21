@@ -49,7 +49,7 @@ export function useIrysUploader() {
       const tx = await irys.upload(serialized, {
         tags: [{ name: "Content-Type", value: "application/json" }],
       })
-
+      console.log(`https://arweave.net/${tx.id}`)
       return `https://arweave.net/${tx.id}`
     },
   }
@@ -69,6 +69,7 @@ export function useIrysImageUploader() {
       const irys = await getWebIrys(client ?? never("viem Client not found"))
 
       const tx = await irys.uploadFile(data)
+      console.log(`https://arweave.net/${tx.id}`)
 
       return `https://arweave.net/${tx.id}`
     },

@@ -89,7 +89,6 @@ export default function FollowButton({ profile }: { profile: Profile }) {
       return handleFollowError(completion.error)
     }
     toast.success("Followed successfully")
-    router.prefetch("/profile")
   }
 
   const unfollow = async () => {
@@ -105,7 +104,6 @@ export default function FollowButton({ profile }: { profile: Profile }) {
       return handleFollowError(completion.error)
     }
     toast.success("Unfollowed successfully")
-    router.prefetch("/profile")
   }
 
   if (profile.operations.isFollowedByMe.value) {

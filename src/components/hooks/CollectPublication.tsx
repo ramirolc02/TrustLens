@@ -24,6 +24,8 @@ export function CollectPublication({
 
     const result = await execute({ publication })
 
+    console.log(publication.operations.canCollect)
+
     if (result.isFailure()) {
       toast.error(result.error.message)
       return
@@ -42,17 +44,19 @@ export function CollectPublication({
   }
 
   return (
-    <div>
-      <Button
-        onClick={(event) => collect(event)}
-        disabled={
-          loading && publication.operations.canCollect === TriStateValue.No
-        }
-        className="rounded-full mr-1"
-      >
-        <Grab className="mr-2 h-4 w-4" />
-        {publication?.stats?.collects}
-      </Button>
-    </div>
+    <>
+      <div>
+        <Button
+          onClick={(event) => collect(event)}
+          disabled={
+            loading || publication.operations.canCollect === TriStateValue.No
+          }
+          className="rounded-full mr-1"
+        >
+          <Grab className="mr-2 h-4 w-4" />
+          {publication?.stats?.collects}
+        </Button>
+      </div>
+    </>
   )
 }
