@@ -11,7 +11,6 @@ export default function Publication({
   params: { id: PublicationId }
 }) {
   const pubId = params.id
-  console.log(pubId)
 
   const { data: publication, loading } = usePublication({
     forId: pubId,
@@ -30,13 +29,10 @@ export default function Publication({
           <p> by: {formatProfileIdentifier(publication.by)}</p>
         </div>
       )}
-
       <UseCreateComment publicationId={pubId} />
-
       <div>
         <h1 className="mb-3 text-3xl font-semibold">Comments:</h1>
       </div>
-
       {publication ? (
         <CommentsOnPublication publication={publication} />
       ) : (

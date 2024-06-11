@@ -6,10 +6,6 @@ import { toast } from "react-hot-toast"
 import { Button } from "../lib/Button"
 import { useIrysImageUploader, useIrysUploader } from "./UploadMetadata"
 
-function never(message: string): never {
-  throw new Error(message)
-}
-
 function CreatePost() {
   const { uploadMetadata } = useIrysUploader()
   const { uploadImage } = useIrysImageUploader()
@@ -17,7 +13,7 @@ function CreatePost() {
   const [file, setFile] = useState<any>()
   const [content, setContent] = useState<string>("")
 
-  async function handleFileChange(e: any) {
+  function handleFileChange(e: any) {
     e.preventDefault()
     if (e.target.files) {
       setFile(e.target.files[0])
