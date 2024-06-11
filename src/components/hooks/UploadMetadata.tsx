@@ -7,7 +7,7 @@ function never(message: string): never {
   throw new Error(message)
 }
 // const TOP_UP = "200000000000000000" // 0.2 MATIC
-const MIN_FUNDS = 0.05
+const MIN_FUNDS = 0.2
 
 export async function getWebIrys(client: Client<Transport, Chain, Account>) {
   const webIrys = new WebIrys({
@@ -26,7 +26,7 @@ export async function getWebIrys(client: Client<Transport, Chain, Account>) {
 
   if (webIrys.utils.fromAtomic(balance).toNumber() < MIN_FUNDS) {
     // Fund the account with Amoy Matic
-    await webIrys.fund(webIrys.utils.toAtomic(0.0005))
+    await webIrys.fund(webIrys.utils.toAtomic(0.2))
   }
 
   return webIrys
