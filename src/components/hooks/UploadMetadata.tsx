@@ -37,7 +37,7 @@ export function useIrysUploader() {
 
   return {
     uploadMetadata: async (data: unknown) => {
-      const confirm = window.confirm(`Almacenar texto en Arweave? `)
+      const confirm = window.confirm(`Almacenar metadatos en Arweave?`)
 
       if (!confirm) {
         throw new Error("User cancelled")

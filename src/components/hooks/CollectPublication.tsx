@@ -24,8 +24,6 @@ export function CollectPublication({
 
     const result = await execute({ publication })
 
-    console.log(publication.operations.canCollect)
-
     if (result.isFailure()) {
       toast.error(result.error.message)
       return
